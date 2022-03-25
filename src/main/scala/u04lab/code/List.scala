@@ -10,6 +10,12 @@ enum List[E]:
 
 // a companion object (i.e., module) for List
 object List:
+
+  def apply[E](elems: E*): List[E] =
+    var list: List[E] = Nil()
+    elems.foreach(el => list = append(list, Cons(el, Nil())))
+    return list
+    
   def sum(l: List[Int]): Int = l match
     case Cons(h, t) => h + sum(t)
     case _ => 0
@@ -61,3 +67,12 @@ object List:
 
   def take[A](list: List[A], n: Int): List[A] = reverse(drop(reverse(list), length(list) - n))
 end List
+
+@main def testListFactory(): Unit =
+  val list: List[Int] = List(1, 2, 3)
+  println(list)
+
+
+
+
+
